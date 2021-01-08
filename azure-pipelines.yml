@@ -20,3 +20,14 @@ steps:
   inputs:
     command: 'publish'
     publishWebProjects: true
+
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'publish'
+    publishWebProjects: true
+    arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+
+- task: PublishPipelineArtifact@1
+  inputs:
+    targetPath: '$(Build.ArtifactStagingDirectory)'
+    publishLocation: 'pipeline'
